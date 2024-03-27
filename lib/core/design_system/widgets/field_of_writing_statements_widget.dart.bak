@@ -1,0 +1,41 @@
+import 'package:quill_html_editor/quill_html_editor.dart';
+import '../design_system.dart';
+
+class FieldOfWritingStatementsWidget extends StatelessWidget {
+  final QuillEditorController controller;
+  final double height;
+  final Function(bool)? onFocusChanged;
+  final Function(String)? onTextChanged;
+  final Function(String)? onEditingCompleted;
+
+  const FieldOfWritingStatementsWidget({
+    Key? key,
+    required this.controller,
+    this.height = 245,
+    this.onFocusChanged,
+    this.onTextChanged,
+    this.onEditingCompleted,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return QuillHtmlEditor(
+      minHeight: height,
+      textStyle: const TextStyle(
+        fontSize: 18,
+        color: Colors.grey,
+      ),
+      hintText: '',
+      padding: const EdgeInsets.only(
+        left: 10,
+        top: 10,
+      ),
+      backgroundColor: Colors.white,
+      inputAction: InputAction.newline,
+      controller: controller,
+      onTextChanged: onTextChanged,
+      onFocusChanged: onFocusChanged,
+      onEditingComplete: onEditingCompleted,
+    );
+  }
+}

@@ -1,0 +1,33 @@
+
+import '../../design_system.dart';
+
+class ToolBarListWidget extends StatelessWidget {
+  final QuillEditorController controller;
+  final List<ToolBarStyle>? toolBarConfig;
+  final EdgeInsetsGeometry? padding;
+  final Color? toolBarColor;
+  final Color? iconColor;
+  final Color? activeIconColor;
+  const ToolBarListWidget({
+    Key? key,
+    required this.controller,
+    this.toolBarConfig,
+    required this.padding,
+    this.toolBarColor,
+    this.iconColor,
+    this.activeIconColor,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return ToolBar(
+      padding: padding,
+      iconSize: 20,
+      toolBarColor: toolBarColor,
+      iconColor: iconColor,
+      activeIconColor: activeIconColor,
+      controller: controller,
+      toolBarConfig: toolBarConfig,
+    );
+  }
+}

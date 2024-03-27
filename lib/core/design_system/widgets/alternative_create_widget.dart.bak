@@ -1,0 +1,94 @@
+import 'package:quill_html_editor/quill_html_editor.dart';
+import '../design_system.dart';
+import 'buttons/button_alternatives_widget.dart';
+
+class AlternativeCreateWidget extends StatelessWidget {
+  final String titleNumberAlternative;
+  final bool visibility;
+  final QuillEditorController controller;
+  final dynamic Function(bool)? onFocusChanged;
+  final dynamic Function(String)? onTextChanged;
+  final Color? colorStateAlternative;
+  final Color? colorSelectedAlternative;
+  final bool selectedAlternative;
+  final void Function()? onPressedAlternative;
+  final Function(String)? onEditingCompleted;
+
+  const AlternativeCreateWidget({
+    Key? key,
+    required this.titleNumberAlternative,
+    required this.visibility,
+    required this.controller,
+    this.onFocusChanged,
+    this.onTextChanged,
+    this.colorStateAlternative,
+    this.colorSelectedAlternative,
+    required this.selectedAlternative,
+    this.onPressedAlternative,
+    this.onEditingCompleted,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    Size size = MediaQuery.of(context).size;
+
+    return Row(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        ButtonAlternativesWidget(
+          title: titleNumberAlternative,
+          style: TextStyles.textMedium.copyWith(
+            fontSize: 10,
+          ),
+          selectedAlternative: selectedAlternative,
+          onPressedButtonAlternative: onPressedAlternative,
+        ),
+        SizedBox(width: size.width * 0.012),
+        Flexible(
+          child: Container(
+            width: size.width * 0.376,
+            height: size.height * 0.19,
+            decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(6),
+                border: Border.all(
+                  color: ColorsAppLight.neutral90,
+                )),
+            child: Column(
+              children: [
+                ToolBarListWidget(
+                  toolBarColor: ColorsAppLight.neutral95,
+                  iconColor: ColorsAppLight.neutral50,
+                  activeIconColor: ColorsAppLight.primary,
+                  controller: controller,
+                  toolBarConfig: customToolBarList,
+                  padding: EdgeInsets.only(
+                    top: size.height * 0.01,
+                    bottom: size.height * 0.01,
+
+                    /// TODO: NAO CONSIGO ARRUMAR O PADDING DE ACORDO COM O INDEX
+                    left: size.width * 0.006,
+                    // index == 0 ? 16 : 8,
+                  ),
+                ),
+                if (visibility == false)
+                  Visibility(
+                    visible: visibility,
+                    child: SizedBox(
+                      height: size.height * 0.14,
+                      child: FieldOfWritingStatementsWidget(
+                        controller: controller,
+                        onFocusChanged: onFocusChanged,
+                        onTextChanged: onTextChanged,
+                        onEditingCompleted: onEditingCompleted,
+                      ),
+                    ),
+                  ),
+                if (visibility == false) const SizedBox(),
+              ],
+            ),
+          ),
+        ),
+      ],
+    );
+  }
+}

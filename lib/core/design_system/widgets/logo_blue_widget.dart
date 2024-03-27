@@ -1,0 +1,18 @@
+import '../design_system.dart';
+
+class LogoBlueWidget extends StatelessWidget {
+  final double height;
+  final double width;
+  const LogoBlueWidget({super.key, required this.height, required this.width});
+
+  @override
+  Widget build(BuildContext context) {
+    return SizedBox(
+      height: height,
+      width: width,
+      child: Image.asset(
+        'assets/image/logo.png',
+      ),
+    );
+  }
+}
