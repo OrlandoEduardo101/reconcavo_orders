@@ -1,7 +1,21 @@
 import 'package:flutter/material.dart';
 
-class DesktopAuthPage extends StatelessWidget {
-  const DesktopAuthPage({super.key});
+import 'auth_page_interface.dart';
+
+class DesktopAuthPage extends StatelessWidget implements IAuthPage {
+  const DesktopAuthPage({
+    super.key,
+    required this.emailController,
+    required this.passwordController,
+    required this.onPressed,
+  });
+
+  @override
+  final TextEditingController emailController;
+  @override
+  final TextEditingController passwordController;
+  @override
+  final void Function()? onPressed;
 
   @override
   Widget build(BuildContext context) {
@@ -26,16 +40,18 @@ class DesktopAuthPage extends StatelessWidget {
                 ),
               ),
               const SizedBox(height: 20.0),
-              const TextField(
-                decoration: InputDecoration(
+              TextField(
+                controller: emailController,
+                decoration: const InputDecoration(
                   hintText: 'insira seu email',
                   border: OutlineInputBorder(), // Adiciona borda ao redor do campo de texto
                 ),
               ),
               const SizedBox(height: 16.0),
-              const TextField(
+              TextField(
                 obscureText: true,
-                decoration: InputDecoration(
+                controller: passwordController,
+                decoration: const InputDecoration(
                   hintText: 'insira sua senha',
                   border: OutlineInputBorder(),
                 ),
@@ -45,6 +61,7 @@ class DesktopAuthPage extends StatelessWidget {
                 child: const Text('Entrar'),
                 onPressed: () {
                   // Ação quando o botão é pressionado
+                  onPressed?.call();
                 },
               ),
             ],

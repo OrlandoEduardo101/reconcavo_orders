@@ -7,19 +7,46 @@
         {
             "name": "reconcavo_orders",
             "request": "launch",
-            "type": "dart"
+            "type": "dart",
+            "args": [
+                "--dart-define-from-file=${cwd}/.env.json",
+                // "--flavor",
+                // "dev",
+                // "--no-shrink"
+                // "--profile",
+                // "--release",
+                // "--multidex ",
+            ]
         },
         {
             "name": "reconcavo_orders (profile mode)",
             "request": "launch",
             "type": "dart",
-            "flutterMode": "profile"
+            "flutterMode": "profile",
+            "args": [
+                "--dart-define-from-file=${cwd}/.env.json",
+                // "--flavor",
+                // "dev",
+                // "--no-shrink"
+                // "--profile",
+                // "--release",
+                // "--multidex ",
+            ]
         },
         {
             "name": "reconcavo_orders (release mode)",
             "request": "launch",
             "type": "dart",
-            "flutterMode": "release"
+            "flutterMode": "release",
+            "args": [
+                "--dart-define-from-file=${cwd}/.env.json",
+                // "--flavor",
+                // "dev",
+                // "--no-shrink"
+                // "--profile",
+                // "--release",
+                // "--multidex ",
+            ]
         }
     ]
 }

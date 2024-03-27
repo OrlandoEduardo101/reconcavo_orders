@@ -1,7 +1,6 @@
 import 'package:routefly/routefly.dart';
 
 import 'app/auth/login/presenter/auth_page.dart' as a1;
-import 'app/auth/login/presenter/pages/desktop_auth_page.dart' as a2;
 import 'app/home/presenter/home_page.dart' as a0;
 
 List<RouteEntity> get routes => [
@@ -20,16 +19,7 @@ List<RouteEntity> get routes => [
     routeBuilder: (ctx, settings) => Routefly.defaultRouteBuilder(
       ctx,
       settings,
-      const a1.AuthPage(),
-    ),
-  ),
-  RouteEntity(
-    key: '/auth/login/presenter/pages/desktop_auth',
-    uri: Uri.parse('/auth/login/presenter/pages/desktop_auth'),
-    routeBuilder: (ctx, settings) => Routefly.defaultRouteBuilder(
-      ctx,
-      settings,
-      const a2.DesktopAuthPage(),
+      a1.AuthPage(),
     ),
   ),
 ];
@@ -50,10 +40,6 @@ const routePaths = (
       presenter: (
         path: '/auth/login/presenter',
         auth: '/auth/login/presenter/auth',
-        pages: (
-          path: '/auth/login/presenter/pages',
-          desktopAuth: '/auth/login/presenter/pages/desktop_auth',
-        ),
       ),
     ),
   ),
