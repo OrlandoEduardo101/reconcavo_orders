@@ -5,7 +5,7 @@ abstract class IRemoteStorageClient {
   Future<AuthResponse> signIn(String email, String password);
   Future<AuthResponse> signUp(String email, String password);
   // Adicione outros métodos que você precisa expor.
-  Future<List<Map<String, dynamic>>> get(String table);
+  Future<List<Map<String, dynamic>>> get(String table, String filterColum, String filterValue);
   Future<dynamic> add(String table, Map<String, dynamic> data);
   Future<dynamic> update(String table, Map<String, dynamic> data);
   Future<dynamic> delete(String table, String id);
@@ -30,8 +30,8 @@ class RemoteStorageClient implements IRemoteStorageClient {
   // Implemente outros métodos da interface conforme necessário.
 
   @override
-  Future<List<Map<String, dynamic>>> get(String table) async {
-    final response = await _client.from(table).select();
+  Future<List<Map<String, dynamic>>> get(String table, String filterColum, String filterValue) async {
+    final response = await _client.from(table).select().eq(filterColum, filterValue);
     return response;
   }
 

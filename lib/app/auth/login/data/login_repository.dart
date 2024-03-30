@@ -27,12 +27,21 @@ class LoginRepository implements ILoginRepository {
 
   Future<Map<String, dynamic>> getUserProfile(String userId) async {
     try {
-      final sql = "SELECT * FROM user_profiles WHERE user_id = '$userId'";
-      final response = await remoteStorageClient.get(sql);
+      final response = await remoteStorageClient.get('user_profiles_with_types', 'user_id', userId);
       return response.first;
     } catch (e) {
       log(e.toString());
       rethrow;
     }
   }
+
+  // Future<Map<String, dynamic>> getUserType(String user_type_id) async {
+  //   try {
+  //     final response = await remoteStorageClient.get('user_types', 'id', user_type_id);
+  //     return response.first;
+  //   } catch (e) {
+  //     log(e.toString());
+  //     rethrow;
+  //   }
+  // }
 }

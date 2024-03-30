@@ -17,8 +17,8 @@ class UserTypeModel {
 
   factory UserTypeModel.fromMap(Map<String, dynamic> map) {
     return UserTypeModel(
-      id: map['id'] as int,
-      name: map['type_name'] as String,
+      id: map['id'] ?? -1,
+      name: map['type_name'] ?? 'undefined',
     );
   }
 

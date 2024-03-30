@@ -14,7 +14,7 @@ class LoggedUserModel {
   final String createdAt;
   final String updatedAt;
 
-  LoggedUserModel({
+  const LoggedUserModel({
     required this.session,
     required this.user,
     required this.userType,
@@ -31,11 +31,11 @@ class LoggedUserModel {
     return <String, dynamic>{
       // 'session': session?.toMap(),
       // 'user': user?.toMap(),
-      // 'userType': userType.toMap(),
-      'name': name,
-      'phone': phone,
-      'createdAt': createdAt,
-      'updatedAt': updatedAt,
+      'user_type': userType.toMap(),
+      'full_name': name,
+      'phone_number': phone,
+      'created_at': createdAt,
+      'updated_at': updatedAt,
     };
   }
 
@@ -43,11 +43,11 @@ class LoggedUserModel {
     return LoggedUserModel(
       session: session,
       user: user,
-      userType: UserTypeModel.fromMap(map['user_type'] as Map<String, dynamic>),
-      name: map['name'] as String,
-      phone: map['phone'] as String,
-      createdAt: map['createdAt'] as String,
-      updatedAt: map['updatedAt'] as String,
+      userType: UserTypeModel.fromMap(map['user_type'] ?? {}),
+      name: map['full_name'] ?? '',
+      phone: map['phone_number'] ?? '',
+      createdAt: map['created_at'] ?? '',
+      updatedAt: map['updated_at'] ?? '',
     );
   }
 
@@ -60,18 +60,3 @@ class LoggedUserModel {
       );
 }
 
-/*
-[
-  {
-    "user_id": "5196d0ec-e7cb-469f-9de3-6a8ee0df0b68",
-    "user_type_id": 1,
-    "full_name": "Orlando Eduardo Pereira",
-    "phone_number": "+5575992619575",
-    "created_at": "2024-03-27 19:51:48.237678+00",
-    "updated_at": "2024-03-27 21:41:38.818814+00",
-    "user_type": {
-      "id": 1,
-      "type_name": "administrador"
-    }
-  }
-]*/
