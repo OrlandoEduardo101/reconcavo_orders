@@ -1,5 +1,4 @@
 import '../design_system.dart';
-import '../styles/colors_app.dart';
 import '../styles/text_styles.dart';
 
 class MenuLateralComponent extends StatelessWidget {
@@ -37,13 +36,16 @@ class MenuLateralComponent extends StatelessWidget {
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
 
+    final theme = Theme.of(context);
+    final colorSceme = theme.colorScheme;
+
     return Container(
       width: size.width * 0.20,
-      color: Colors.white,
+      color: colorSceme.surface,
       child: Column(
         children: [
           Container(
-            color: ColorsAppLight.primary,
+            color: colorSceme.primary,
             height: size.height * 0.13,
             width: size.width * 0.20,
             child: Center(
@@ -69,7 +71,7 @@ class MenuLateralComponent extends StatelessWidget {
                     text: titleMain,
                     style: TextStyles.textMedium.copyWith(
                       fontSize: 16,
-                      color: ColorsAppLight.neutral50,
+                      color: colorSceme.onSurface,
                     )),
                 SizedBox(height: size.height * 0.009),
                 IconButtonWidget(

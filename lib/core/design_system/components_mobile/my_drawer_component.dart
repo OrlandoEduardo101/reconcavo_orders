@@ -3,7 +3,6 @@ import 'dart:ui';
 import 'package:reconcavo_orders/core/models/user_model.dart';
 import 'package:routefly/routefly.dart';
 
-import '../../../app/routes.dart.bak';
 import '../design_system.dart';
 import '../styles/colors_app.dart';
 import '../styles/text_styles.dart';
@@ -52,8 +51,7 @@ class _MyDrawerComponentState extends State<MyDrawerComponent> {
                   const SizedBox(width: 16),
                   TextWidget(
                       text: 'Menu',
-                      style: TextStyles.textMedium.copyWith(
-                          fontSize: 12, color: ColorsAppLight.neutral50))
+                      style: TextStyles.textMedium.copyWith(fontSize: 12, color: ColorsAppLight.neutral50))
                 ],
               ),
               const SizedBox(height: 20),

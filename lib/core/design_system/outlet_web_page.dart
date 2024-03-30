@@ -1,8 +1,4 @@
-import 'package:reconcavo_orders/app/routes.dart.bak';
-import 'package:routefly/routefly.dart';
-
 import 'design_system.dart';
-import 'styles/colors_app.dart';
 
 class OutletWebPage extends StatefulWidget {
   final Widget widgetList;
@@ -13,7 +9,7 @@ class OutletWebPage extends StatefulWidget {
 }
 
 class _OutletWebPageState extends State<OutletWebPage> {
-  bool selectedHome = false;
+  bool selectedHome = true;
   bool selectedUser = false;
   bool selectedBaseOfQuestion = false;
   bool selectedConfig = false;
@@ -21,6 +17,8 @@ class _OutletWebPageState extends State<OutletWebPage> {
   @override
   Widget build(BuildContext context) {
     final Size size = MediaQuery.of(context).size;
+    final theme = Theme.of(context);
+    final colorSceme = theme.colorScheme;
     return Scaffold(
       body: CustomScrollView(
         scrollDirection: Axis.vertical,
@@ -34,7 +32,7 @@ class _OutletWebPageState extends State<OutletWebPage> {
                     MenuLateralComponent(
                       iconButtonHome: Icon(
                         IconsApp.home,
-                        color: selectedHome == false ? ColorsAppLight.neutral40 : ColorsAppLight.white,
+                        color: selectedHome == false ? colorSceme.onSurface : colorSceme.onPrimary,
                         size: 20,
                       ),
                       onPressedButtonHome: () {
@@ -43,12 +41,12 @@ class _OutletWebPageState extends State<OutletWebPage> {
                           // Routefly.navigate(routePaths.pages.home.home);
                         });
                       },
-                      colorStateBackground: ColorsAppLight.white,
-                      colorSelectedBackgound: ColorsAppLight.primary,
-                      colorStateOutiline: ColorsAppLight.white,
-                      colorSelectedOutiline: ColorsAppLight.primary,
-                      colorStateText: ColorsAppLight.neutral40,
-                      colorSelectedText: ColorsAppLight.white,
+                      colorStateBackground: colorSceme.surface,
+                      colorSelectedBackgound: colorSceme.primary,
+                      colorStateOutiline: colorSceme.onSurface,
+                      colorSelectedOutiline: colorSceme.primary,
+                      colorStateText: colorSceme.onSurface,
+                      colorSelectedText: colorSceme.onPrimary,
                       selectedHome: selectedHome,
                     ),
                     Padding(
