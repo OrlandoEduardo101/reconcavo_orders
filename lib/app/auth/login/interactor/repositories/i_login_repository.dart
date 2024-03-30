@@ -1,4 +1,4 @@
-import 'package:reconcavo_orders/app/auth/login/interactor/models/logged_user_model.dart';
+import 'package:reconcavo_orders/core/models/logged_user_model.dart';
 
 import '../dto/login_dto.dart';
 

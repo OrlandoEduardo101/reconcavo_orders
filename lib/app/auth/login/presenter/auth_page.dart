@@ -6,7 +6,7 @@ import 'package:reconcavo_orders/routes.dart';
 import 'package:routefly/routefly.dart';
 
 import '../interactor/actions/login_action.dart';
-import '../interactor/models/logged_user_model.dart';
+import '../../../../core/models/logged_user_model.dart';
 import 'pages/desktop_auth_page_widget.dart';
 import 'pages/mobile_auth_page_widget.dart';
 
