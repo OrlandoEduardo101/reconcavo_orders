@@ -1,8 +1,10 @@
 import 'package:reconcavo_orders/app/administrative_dashboard/modules/stock/presenter/pages/stock_desktop.dart';
 import 'package:reconcavo_orders/app/administrative_dashboard/modules/stock/presenter/pages/stock_mobile.dart';
 import 'package:reconcavo_orders/core/extensions/size_extension.dart';
+import 'package:routefly/routefly.dart';
 
 import '../../../../../core/design_system/design_system.dart';
+import '../../../../../routes.dart';
 
 class StockPage extends StatelessWidget {
   const StockPage({super.key});
@@ -15,7 +17,9 @@ class StockPage extends StatelessWidget {
     return Scaffold(
       body: isMobile ? StockMobile() : const StockDesktop(),
       floatingActionButton: FloatingActionButton.extended(
-        onPressed: () {},
+        onPressed: () {
+          Routefly.navigate(routePaths.administrativeDashboard.modules.stock.presenter.createCategory);
+        },
         label: Row(
           children: [
             const Padding(

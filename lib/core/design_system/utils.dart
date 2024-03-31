@@ -1,5 +1,17 @@
 import '../utils/images_app.dart';
 
+String removeDiacritics(String source) {
+  const accents = 'ÀÁÂÃÄÅàáâãäåÒÓÔÕÖØòóôõöøÈÉÊËèéêëÇçÌÍÎÏìíîïÙÚÛÜùúûüÿÑñ';
+  const nonAccents = 'AAAAAAaaaaaaOOOOOOooooooEEEEeeeeCcIIIIiiiiUUUUuuuuyNn';
+  
+  for (int i = 0; i < accents.length; i++) {
+    source = source.replaceAll(accents[i], nonAccents[i]);
+  }
+
+  return source;
+}
+
+
 List<String> imagesCarousel = [
   'assets/image/Frame.png',
   ImagesApp.womanLogin,

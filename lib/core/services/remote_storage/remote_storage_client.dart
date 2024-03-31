@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:supabase_flutter/supabase_flutter.dart';
 
 // Defina a interface
@@ -9,6 +11,7 @@ abstract class IRemoteStorageClient {
   Future<dynamic> add(String table, Map<String, dynamic> data);
   Future<dynamic> update(String table, Map<String, dynamic> data);
   Future<dynamic> delete(String table, String id);
+  Future<String> uploadFile(String bucket, String fileName, File file);
 }
 
 // Implemente a interface
@@ -51,5 +54,16 @@ class RemoteStorageClient implements IRemoteStorageClient {
   Future<dynamic> delete(String table, String id) async {
     final response = await _client.from(table).delete().match({'id': id});
     return response;
+  }
+
+  @override
+  Future<String> uploadFile(String bucket, String fileName, file) async {
+    final response = await _client.storage.from(bucket).upload(fileName, file);
+
+    final publicUrlResponse = _client.storage.from(bucket).getPublicUrl(fileName);
+
+    final imageUrl = publicUrlResponse;
+
+    return imageUrl;
   }
 }
