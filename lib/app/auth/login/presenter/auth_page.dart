@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:reconcavo_orders/app/app_action.dart';
 import 'package:reconcavo_orders/app/app_atom.dart';
 import 'package:reconcavo_orders/app/auth/login/interactor/atoms/login_atom.dart';
+import 'package:reconcavo_orders/app/auth/login/presenter/pages/auth_text_controller.dart';
 import 'package:reconcavo_orders/core/extensions/size_extension.dart';
 import 'package:routefly/routefly.dart';
 
@@ -13,13 +14,10 @@ import 'pages/desktop_auth_page_widget.dart';
 import 'pages/mobile_auth_page_widget.dart';
 
 class AuthPage extends StatelessWidget {
-  AuthPage({super.key});
-
-  final TextEditingController emailController = TextEditingController();
-  final TextEditingController passwordController = TextEditingController();
+  const AuthPage({super.key});
 
   void onPressed() {
-    signInAction(emailController.text, passwordController.text);
+    signInAction(AuthTextController.emailController.text, AuthTextController.passwordController.text);
   }
 
   void updateGlobalUser(LoggedUserModel user) {
@@ -38,7 +36,7 @@ class AuthPage extends StatelessWidget {
         updateGlobalUser(loggedUser);
 
         if (appState.value.loggedUser.userType.id == 1 || appState.value.loggedUser.userType.id == 2) {
-          Routefly.navigate(routePaths.administrativeDashboard.presenter.administrativeDashboard);
+          Routefly.navigate(routePaths.administrativeDashboard.modules.stock.presenter.stock);
         }
       });
     }
@@ -46,13 +44,13 @@ class AuthPage extends StatelessWidget {
     return Scaffold(
       body: isMobile
           ? MobileAuthPage(
-              emailController: emailController,
-              passwordController: passwordController,
+              emailController: AuthTextController.emailController,
+              passwordController: AuthTextController.passwordController,
               onPressed: onPressed,
             )
           : DesktopAuthPage(
-              emailController: emailController,
-              passwordController: passwordController,
+              emailController: AuthTextController.emailController,
+              passwordController: AuthTextController.passwordController,
               onPressed: onPressed,
             ),
     );

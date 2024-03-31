@@ -20,23 +20,39 @@ class DesktopAuthPage extends StatelessWidget implements IAuthPage {
   @override
   Widget build(BuildContext context) {
     // A cor de fundo da tela parece ser um tom claro de verde.
-    Color backgroundColor = const Color(0xFFA8D098); // A cor primária fornecida anteriormente
-
+    Size size = MediaQuery.of(context).size;
+    final theme = Theme.of(context);
+    final colorScheme = theme.colorScheme;
     return Scaffold(
-      backgroundColor: backgroundColor,
+      backgroundColor: colorScheme.primaryContainer,
       body: Center(
         child: Container(
           padding: const EdgeInsets.all(20.0),
-          color: Colors.white, // Fundo do container de login
-          width: 300.0, // Largura fixa para o container
+          decoration: BoxDecoration(
+            color: colorScheme.surface, // Fundo do container de login
+            borderRadius: BorderRadius.circular(12.0), // Arredonda os cantos do container
+          ), // Fundo do container de login
+          constraints: const BoxConstraints(
+            minWidth: 400,
+            maxWidth: 600,
+            minHeight: 400,
+            maxHeight: 600,
+          ),
           child: Column(
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            crossAxisAlignment: CrossAxisAlignment.stretch,
             mainAxisSize: MainAxisSize.min, // Minimiza o tamanho da coluna ao conteúdo interno
             children: <Widget>[
-              const Text(
-                'Login',
-                style: TextStyle(
-                  fontSize: 24.0,
-                  fontWeight: FontWeight.bold,
+              Container(
+                color: colorScheme.primaryContainer,
+                // height: size.height * 0.18,
+                // width: size.width * 0.20,
+                child: Center(
+                  child: Image.asset(
+                    'widget.imageLogo',
+                    height: size.height * 0.06,
+                    width: size.width * 0.08,
+                  ),
                 ),
               ),
               const SizedBox(height: 20.0),

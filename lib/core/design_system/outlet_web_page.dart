@@ -9,11 +9,6 @@ class OutletWebPage extends StatefulWidget {
 }
 
 class _OutletWebPageState extends State<OutletWebPage> {
-  bool selectedHome = true;
-  bool selectedUser = false;
-  bool selectedBaseOfQuestion = false;
-  bool selectedConfig = false;
-
   @override
   Widget build(BuildContext context) {
     final Size size = MediaQuery.of(context).size;
@@ -30,24 +25,28 @@ class _OutletWebPageState extends State<OutletWebPage> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     MenuLateralComponent(
-                      iconButtonHome: Icon(
-                        IconsApp.home,
-                        color: selectedHome == false ? colorSceme.onSurface : colorSceme.onPrimary,
-                        size: 20,
-                      ),
-                      onPressedButtonHome: () {
-                        setState(() {
-                          selectedHome = !selectedHome;
-                          // Routefly.navigate(routePaths.pages.home.home);
-                        });
-                      },
+                      items: [
+                        MenuLateralItem(
+                          title: 'Estoque',
+                          onPressed: () {
+                            // Routefly.navigate(routePaths.pages.home.home);
+                          },
+                          icon: IconsApp.home,
+                        ),
+                        MenuLateralItem(
+                          title: 'Clientes',
+                          onPressed: () {
+                            // Routefly.navigate(routePaths.pages.home.home);
+                          },
+                          icon: IconsApp.users_2,
+                        ),
+                      ],
                       colorStateBackground: colorSceme.surface,
                       colorSelectedBackgound: colorSceme.primary,
                       colorStateOutiline: colorSceme.onSurface,
                       colorSelectedOutiline: colorSceme.primary,
                       colorStateText: colorSceme.onSurface,
                       colorSelectedText: colorSceme.onPrimary,
-                      selectedHome: selectedHome,
                     ),
                     Padding(
                       padding: EdgeInsets.only(
