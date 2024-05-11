@@ -1,4 +1,4 @@
-import 'dart:io';
+import 'dart:typed_data';
 
 import 'package:supabase_flutter/supabase_flutter.dart';
 
@@ -11,7 +11,7 @@ abstract class IRemoteStorageClient {
   Future<dynamic> add(String table, Map<String, dynamic> data);
   Future<dynamic> update(String table, Map<String, dynamic> data);
   Future<dynamic> delete(String table, String id);
-  Future<String> uploadFile(String bucket, String fileName, File file);
+  Future<String> uploadFile(String bucket, String fileName, Uint8List fileBytes);
 }
 
 // Implemente a interface
@@ -57,8 +57,9 @@ class RemoteStorageClient implements IRemoteStorageClient {
   }
 
   @override
-  Future<String> uploadFile(String bucket, String fileName, file) async {
-    final response = await _client.storage.from(bucket).upload(fileName, file);
+  Future<String> uploadFile(String bucket, String fileName, Uint8List fileBytes) async {
+    _client.storage.setAuth(_client.auth.currentSession!.accessToken);
+    final response = await _client.storage.from(bucket).uploadBinary(fileName, fileBytes);
 
     final publicUrlResponse = _client.storage.from(bucket).getPublicUrl(fileName);
 

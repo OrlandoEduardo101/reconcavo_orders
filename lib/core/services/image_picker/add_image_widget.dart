@@ -9,9 +9,10 @@ import 'image_picker_service.dart'; // Importe seu service de ImagePicker
 typedef OnImagePicked = Function(Uint8List? imageBytes);
 
 class AddImageWidget extends StatefulWidget {
+  final Uint8List? imagebytes;
   final OnImagePicked onImagePicked;
 
-  const AddImageWidget({super.key, required this.onImagePicked});
+  const AddImageWidget({super.key, required this.onImagePicked, this.imagebytes});
 
   @override
   _AddImageWidgetState createState() => _AddImageWidgetState();
@@ -20,6 +21,12 @@ class AddImageWidget extends StatefulWidget {
 class _AddImageWidgetState extends State<AddImageWidget> {
   Uint8List? _imageBytes;
   final IImagePickerService _imagePickerService = ImagePickerService();
+
+  @override
+  void initState() {
+    super.initState();
+    _imageBytes = widget.imagebytes;
+  }
 
   void _showPickOptionsDialog() {
     showDialog(

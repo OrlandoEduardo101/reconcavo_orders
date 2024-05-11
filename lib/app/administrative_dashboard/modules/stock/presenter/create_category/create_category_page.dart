@@ -1,12 +1,15 @@
 import 'dart:developer';
 import 'dart:typed_data';
 
+import 'package:asp/asp.dart';
 import 'package:flutter/material.dart';
-import 'package:reconcavo_orders/core/design_system/utils.dart';
+import 'package:reconcavo_orders/app/administrative_dashboard/modules/stock/interactor/atoms/create_category_atom.dart';
 import 'package:reconcavo_orders/core/design_system/widgets/buttons/button_widget.dart';
 import 'package:reconcavo_orders/core/extensions/size_extension.dart';
 import 'package:reconcavo_orders/core/services/image_picker/add_image_widget.dart';
 
+import '../../interactor/actions/create_category_action.dart';
+import '../../interactor/dto/create_category_dto.dart';
 import 'create_category_desktop.dart';
 import 'create_category_mobile.dart';
 
@@ -19,14 +22,12 @@ class CreateCategoryPage extends StatefulWidget {
 
 class _CreateCategoryPageState extends State<CreateCategoryPage> {
   final _formKey = GlobalKey<FormState>();
-  String _name = '';
-  String _description = '';
-  String? _slug;
-  String? _imageUrl;
 
   void _submitForm() async {
     if (_formKey.currentState!.validate()) {
       _formKey.currentState!.save();
+
+      createCategory(createCategoryState.value);
 
       // final response = await Supabase.instance.client
       //     .from('categories')
@@ -50,16 +51,18 @@ class _CreateCategoryPageState extends State<CreateCategoryPage> {
     }
   }
 
-  final addImageWidget = AddImageWidget(
-      key: const Key('add-image-categories-widget'),
-      onImagePicked: (Uint8List? imagePath) {
-        // _imageUrl = imagePath;
-        log("Imagem selecionada: $imagePath");
-        // Aqui você pode fazer algo com o caminho da imagem, como armazená-lo ou usá-lo em outra parte do seu app
-      });
-
   @override
   Widget build(BuildContext context) {
+    CreateCategoryDto state = context.select(() => createCategoryState.value);
+    final addImageWidget = AddImageWidget(
+        key: const Key('add-image-categories-widget'),
+        imagebytes: state.imagebytes,
+        onImagePicked: (Uint8List? imagebytes) {
+          // _imageUrl = imagePath;
+          log("Imagem selecionada: $imagebytes");
+          setImageBytes(imagebytes);
+          // Aqui você pode fazer algo com o caminho da imagem, como armazená-lo ou usá-lo em outra parte do seu app
+        });
     final isMobile = MediaQuery.of(context).size.isMobile;
     final theme = Theme.of(context);
     final colorScheme = theme.colorScheme;
@@ -67,9 +70,11 @@ class _CreateCategoryPageState extends State<CreateCategoryPage> {
     final formWidgtes = <Widget>[
       TextFormField(
         decoration: const InputDecoration(labelText: 'Nome'),
-        onSaved: (value) => _name = value!,
+        initialValue: state.name,
+        onChanged: (value) {
+          setCategoryName(value);
+        },
         validator: (value) {
-          _slug = removeDiacritics(value ?? '').replaceAll(' ', '-');
           return value?.isEmpty ?? true ? 'Este campo é obrigatório' : null;
         },
       ),
@@ -78,7 +83,8 @@ class _CreateCategoryPageState extends State<CreateCategoryPage> {
       ),
       TextFormField(
         decoration: const InputDecoration(labelText: 'Descrição'),
-        onSaved: (value) => _description = value ?? '',
+        initialValue: state.description,
+        onChanged: (value) => setCategoryDescription(value),
       ),
       // TextFormField(
       //   decoration: const InputDecoration(labelText: 'Slug'),
