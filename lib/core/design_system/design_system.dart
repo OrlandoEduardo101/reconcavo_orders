@@ -1,17 +1,11 @@
 library design_system;
 
-export '../../../core/design_system/components_mobile/editing_categories_mobile_screen.dart';
-export '../../../core/design_system/components_mobile/list_activity_component.dart';
-export '../../../core/design_system/components_web/content_search_component.dart';
-export '../../../core/design_system/components_web/list_of_questions_component.dart';
-export '../../../core/design_system/components_web/new_field_creating_component.dart';
-export '../../../core/design_system/components_web/question_creation_classification_component.dart';
-export '../../../core/design_system/widgets/categories_my_notebook_widget.dart';
+export 'package:flutter/material.dart';
+
 export '../../../core/design_system/widgets/dialogs/dialog_sucess_widget.dart';
 export '../../../core/design_system/widgets/dialogs/message_error_new_question_empty_widget.dart';
 export '../../../core/design_system/widgets/list_to_users_widget.dart';
 export '../../../core/design_system/widgets/pagination_component.dart';
-export '../design_system/components_web/row_button_component.dart';
 export './styles/icons_app_icons.dart';
 export './styles/shadow_app.dart';
 export './utils.dart';
@@ -22,14 +16,10 @@ export './widgets/buttons/button_filter_widget.dart';
 export './widgets/buttons/icon_button_widget.dart';
 export './widgets/buttons/text_button_borders.dart';
 export './widgets/carousel_widget.dart';
-export './widgets/container_filter_selections_widget.dart';
 export './widgets/dropdown_widget.dart';
 export './widgets/text_field_widget.dart';
 export './widgets/text_widget.dart';
 export '/core/design_system/widgets/container_tag_widget.dart';
-export 'components_web/dialog_new_user_component.dart';
-export 'components_web/dialog_view_profile_component.dart';
 export 'components_web/menu_lateral_component.dart';
-export 'package:flutter/material.dart';
 export 'widgets/buttons/button_widget.dart';
 export 'widgets/logo_blue_widget.dart';
