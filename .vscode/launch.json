@@ -50,3 +50,6 @@
         }
     ]
 }
+
+// fvm flutter build web --release --dart-define-from-file=.env.json
+// https://upuwzjfkiphtgphtlwjo.supabase.co/auth/v1/verify?token=pkce_0b24f4cd7bbb26039669c17b7a102e7408778d79e1c46b7353cd2c6f&type=recovery&redirect_to=https://reconcavo-orders.web.app/

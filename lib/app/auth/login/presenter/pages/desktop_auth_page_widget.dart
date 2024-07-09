@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:reconcavo_orders/core/design_system/widgets/buttons/button_widget.dart';
 
+import '../../interactor/atoms/login_atom.dart';
 import 'auth_page_interface.dart';
 
 class DesktopAuthPage extends StatelessWidget implements IAuthPage {
@@ -9,6 +10,7 @@ class DesktopAuthPage extends StatelessWidget implements IAuthPage {
     required this.emailController,
     required this.passwordController,
     required this.onPressed,
+    required this.onPressedResetPassword,
   });
 
   @override
@@ -17,6 +19,8 @@ class DesktopAuthPage extends StatelessWidget implements IAuthPage {
   final TextEditingController passwordController;
   @override
   final void Function()? onPressed;
+  @override
+  final void Function()? onPressedResetPassword;
 
   @override
   Widget build(BuildContext context) {
@@ -73,6 +77,14 @@ class DesktopAuthPage extends StatelessWidget implements IAuthPage {
                   decoration: const InputDecoration(
                     hintText: 'insira sua senha',
                     border: OutlineInputBorder(),
+                  ),
+                ),
+                // const SizedBox(height: 20.0),
+                Align(
+                  alignment: Alignment.centerRight,
+                  child: TextButton(
+                    onPressed: isSendingEmail.value ? null : onPressedResetPassword,
+                    child: const Text('Esqueci minha senha'),
                   ),
                 ),
                 const SizedBox(height: 20.0),

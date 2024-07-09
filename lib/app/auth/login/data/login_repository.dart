@@ -25,6 +25,30 @@ class LoginRepository implements ILoginRepository {
     }
   }
 
+  @override
+  Future<void> resetPasswordForEmail(LoginDto params) async {
+    try {
+      await remoteStorageClient.resetPasswordForEmail(params.email);
+
+    
+    } catch (e) {
+      log(e.toString());
+      rethrow;
+    }
+  }
+
+  @override
+  Future<void> updatePassword(LoginDto params) async {
+    try {
+      await remoteStorageClient.updateUserPassword(params.email, params.token);
+
+      return;
+    } catch (e) {
+      log(e.toString());
+      rethrow;
+    }
+  }
+
   Future<Map<String, dynamic>> getUserProfile(String userId) async {
     try {
       final response = await remoteStorageClient.get('user_profiles_with_types', 'user_id', userId);

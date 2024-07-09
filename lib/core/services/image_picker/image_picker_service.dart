@@ -1,7 +1,10 @@
 import 'dart:developer';
 import 'dart:typed_data';
 
+import 'package:image_compression_flutter/image_compression_flutter.dart';
 import 'package:image_picker/image_picker.dart';
+
+import 'compress_image.dart';
 
 abstract class IImagePickerService {
   Future<Uint8List?> pickImageFromCamera();
@@ -16,7 +19,9 @@ class ImagePickerService implements IImagePickerService {
     try {
       final XFile? image = await _picker.pickImage(source: ImageSource.camera);
       if (image != null) {
-        return await image.readAsBytes();
+        final asImageFile = await image.asImageFile;
+        final imageCompress = await compressToLess50mb(asImageFile);
+        return imageCompress.rawBytes;
       }
       return null;
     } catch (e) {
@@ -30,7 +35,9 @@ class ImagePickerService implements IImagePickerService {
     try {
       final XFile? image = await _picker.pickImage(source: ImageSource.gallery);
       if (image != null) {
-        return await image.readAsBytes();
+        final asImageFile = await image.asImageFile;
+        final imageCompress = await compressToLess50mb(asImageFile);
+        return imageCompress.rawBytes;
       }
       return null;
     } catch (e) {

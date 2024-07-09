@@ -6,12 +6,14 @@ import 'package:supabase_flutter/supabase_flutter.dart';
 abstract class IRemoteStorageClient {
   Future<AuthResponse> signIn(String email, String password);
   Future<AuthResponse> signUp(String email, String password);
+  Future<void> resetPasswordForEmail(String email);
   // Adicione outros métodos que você precisa expor.
   Future<List<Map<String, dynamic>>> get(String table, String filterColum, String filterValue);
   Future<dynamic> add(String table, Map<String, dynamic> data);
   Future<dynamic> update(String table, Map<String, dynamic> data);
   Future<dynamic> delete(String table, String id);
   Future<String> uploadFile(String bucket, String fileName, Uint8List fileBytes);
+  Future<UserResponse> updateUserPassword(String password, String token);
 }
 
 // Implemente a interface
@@ -19,6 +21,21 @@ class RemoteStorageClient implements IRemoteStorageClient {
   final SupabaseClient _client;
 
   RemoteStorageClient(this._client);
+
+  @override
+  Future<void> resetPasswordForEmail(String email) async {
+    return await _client.auth.resetPasswordForEmail(email);
+  }
+
+  @override
+  Future<UserResponse> updateUserPassword(String password, String token) async {
+    await _client.auth.verifyOTP(token: token, type: OtpType.recovery);
+    return await _client.auth.updateUser(
+      UserAttributes(
+        password: password,
+      ),
+    );
+  }
 
   @override
   Future<AuthResponse> signIn(String email, String password) async {

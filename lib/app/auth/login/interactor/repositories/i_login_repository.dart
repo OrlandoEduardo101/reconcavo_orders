@@ -4,4 +4,6 @@ import '../dto/login_dto.dart';
 
 abstract class ILoginRepository {
   Future<LoggedUserModel> signIn(LoginDto params);
+  Future<void> resetPasswordForEmail(LoginDto params);
+  Future<void> updatePassword(LoginDto params);
 }

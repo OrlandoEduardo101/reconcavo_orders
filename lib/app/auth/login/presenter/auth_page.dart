@@ -20,6 +20,18 @@ class AuthPage extends StatelessWidget {
     signInAction(AuthTextController.emailController.text, AuthTextController.passwordController.text);
   }
 
+  void onPressedResetPassword(BuildContext context) {
+    if (AuthTextController.emailController.text.isEmpty) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text('Insira seu email.'),
+        ),
+      );
+      return;
+    }
+    resetPasswordForEmailAction(AuthTextController.emailController.text);
+  }
+
   void updateGlobalUser(LoggedUserModel user) {
     setGlobalLoggedUser(user);
   }
@@ -28,8 +40,10 @@ class AuthPage extends StatelessWidget {
   Widget build(BuildContext context) {
     final isMobile = MediaQuery.of(context).size.isMobile;
     // AppState appState0 = context.select(() => appState.value);
+    context.select(() => isSendingEmail.value);
 
     LoggedUserModel loggedUser = context.select(() => userState.value);
+    String resetMessage = context.select(() => resetPasswordMessage.value);
 
     if (loggedUser.session != null) {
       WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
@@ -41,17 +55,29 @@ class AuthPage extends StatelessWidget {
       });
     }
 
+    if (resetMessage.isNotEmpty) {
+      WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text(resetMessage),
+          ),
+        );
+      });
+    }
+
     return Scaffold(
       body: isMobile
           ? MobileAuthPage(
               emailController: AuthTextController.emailController,
               passwordController: AuthTextController.passwordController,
               onPressed: onPressed,
+              onPressedResetPassword: () => onPressedResetPassword.call(context),
             )
           : DesktopAuthPage(
               emailController: AuthTextController.emailController,
               passwordController: AuthTextController.passwordController,
               onPressed: onPressed,
+              onPressedResetPassword: () => onPressedResetPassword.call(context),
             ),
     );
   }

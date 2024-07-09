@@ -1,10 +1,17 @@
 import 'package:reconcavo_orders/core/design_system/styles/text_styles.dart';
 
 import '../../../../../core/design_system/design_system.dart';
+import '../../interactor/atoms/login_atom.dart';
 import 'auth_page_interface.dart';
 
 class MobileAuthPage extends StatelessWidget implements IAuthPage {
-  const MobileAuthPage({super.key, required this.emailController, required this.passwordController, this.onPressed});
+  const MobileAuthPage({
+    super.key,
+    required this.emailController,
+    required this.passwordController,
+    this.onPressed,
+    this.onPressedResetPassword,
+  });
 
   @override
   final TextEditingController emailController;
@@ -12,6 +19,8 @@ class MobileAuthPage extends StatelessWidget implements IAuthPage {
   final TextEditingController passwordController;
   @override
   final void Function()? onPressed;
+  @override
+  final void Function()? onPressedResetPassword;
 
   @override
   Widget build(BuildContext context) {
@@ -89,6 +98,14 @@ class MobileAuthPage extends StatelessWidget implements IAuthPage {
                           ),
                         ),
                       ],
+                    ),
+                    // const SizedBox(height: 8.0),
+                    Align(
+                      alignment: Alignment.centerRight,
+                      child: TextButton(
+                        onPressed: isSendingEmail.value ? null : onPressedResetPassword,
+                        child: const Text('Esqueci minha senha'),
+                      ),
                     ),
                     const SizedBox(height: 20.0),
                     Column(
